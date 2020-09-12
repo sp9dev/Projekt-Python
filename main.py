@@ -1,6 +1,10 @@
 from classes import *
 import json
 import paho.mqtt.client as mqtt
+import pygame
+
+
+pygame.init()
 
 entities = {}
 
@@ -10,6 +14,9 @@ with open("config.json", "r") as json_data:
 house = HousePlan(config["HouseData"]["PlanIMG"])
 #print(house.path)
 #print(config)
+
+window = pygame.display.set_mode((house.x_size, house.y_size))
+clock = pygame.time.Clock()
 
 for entity in config["IoTEntities"]:
     e = IoTEntity(entity, config["IoTEntities"][entity]["type"], 
@@ -46,5 +53,16 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 client.connect(config["BrokerData"]["Host"], config["BrokerData"]["Port"], config["BrokerData"]["timeout"])
-client.loop_forever()
+client.loop_start()
+
+bg = pygame.image.load(house.path)
+while True:
+    clock.tick(60)
+    window.blit(bg, (0,0))
+    for entity in entities:
+        entities[entity].blit(window)
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
 

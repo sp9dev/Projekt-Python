@@ -1,12 +1,13 @@
 from PIL import Image
+import pygame
 
 class IoTEntity:
 
     def __init__(self, name, type, xpos, ypos):
         self.name = name
         self.type = type
-        self.x = 0.0
-        self.y = 0.0
+        self.x = xpos
+        self.y = ypos
         self.icon = "resources/" + type + ".png"
         self.state = 0
         self.msg = ""
@@ -42,6 +43,14 @@ class IoTEntity:
             self.state = 1
         if message == "closed":
             self.state = 0
+
+    def blit(self, window):
+        ic = pygame.image.load(self.icon)
+        area = window.get_rect()
+        ic = pygame.transform.scale(ic, (int(0.1 * area[2]), int(0.1 * area[2])))
+        window.blit(ic, (self.x * float(area[2]), self.y * float(area[3])))
+        
+        
 
 class HousePlan:
 
