@@ -6,6 +6,7 @@ import pygame
 
 pygame.init()
 
+
 entities = {}
 
 with open("config.json", "r") as json_data:
@@ -20,7 +21,7 @@ clock = pygame.time.Clock()
 
 for entity in config["IoTEntities"]:
     e = IoTEntity(entity, config["IoTEntities"][entity]["type"], 
-                    config["IoTEntities"][entity]["xpos"], config["IoTEntities"][entity]["ypos"])
+                    config["IoTEntities"][entity]["xpos"], config["IoTEntities"][entity]["ypos"], window)
     entities[entity] = e
 #
 #for e in entities:
@@ -60,9 +61,14 @@ while True:
     clock.tick(60)
     window.blit(bg, (0,0))
     for entity in entities:
-        entities[entity].blit(window)
+        entities[entity].blit()
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1: 
+                for e in entities:
+                    if entities[e].rect.collidepoint(event.pos):
+                        entities[e].toggle_description()
 

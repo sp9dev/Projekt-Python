@@ -14,15 +14,15 @@
         "xpos": 0.64,
         "ypos": 0.22
       },
-      "kitchen-temp": {
+      "bedroom-temp": {
         "type": "sensor",
-        "xpos": 0.66,
+        "xpos": 0.30,
         "ypos": 0.21
       },
       "kitchen-window": {
         "type": "window",
-        "xpos": 0.65,
-        "ypos": 0.20
+        "xpos": 0.84,
+        "ypos": 0.23
       }
     }
   }
