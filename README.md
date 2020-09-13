@@ -36,3 +36,5 @@ W pliku konfiguracyjnym można nadać urządzeniu jeden z 4 typów:
 Po kliknięciu na ikonę urządzenia na planie wyświetla się nad nią nazwa urządzenia, a w przypadku sensorów pod ikoną wyświetla się ostatnia odebrana wiadomość.
 
 Użytkownik może przesuwać ikony by lepiej dostosować ich położenie.
+
+Roziar okna dostosowuje się do rozmiaru załadowanego planu. 
