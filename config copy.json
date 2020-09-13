@@ -1,0 +1,28 @@
+{
+    "BrokerData": {
+      "Host": "127.0.0.1",
+      "Port": 1883,
+      "timeout": 60,
+      "topic": "/main"
+    },
+    "HouseData": {
+      "PlanIMG": "resources/randomhouse.png"
+    },
+    "IoTEntities": {
+      "kitchen-light-1": {
+        "type": "light",
+        "xpos": 0.64,
+        "ypos": 0.22
+      },
+      "bedroom-temp": {
+        "type": "sensor",
+        "xpos": 0.30,
+        "ypos": 0.21
+      },
+      "kitchen-window": {
+        "type": "window",
+        "xpos": 0.84,
+        "ypos": 0.23
+      }
+    }
+  }

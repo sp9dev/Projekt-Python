@@ -71,4 +71,20 @@ while True:
                 for e in entities:
                     if entities[e].rect.collidepoint(event.pos):
                         entities[e].toggle_description()
-
+                        entities[e].dragging = True
+                        mouse_x, mouse_y = event.pos
+                        offset_x = entities[e].x - mouse_x
+                        offset_y = entities[e].y - mouse_y
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:            
+                for e in entities:
+                    if entities[e].rect.collidepoint(event.pos):
+                        entities[e].dragging = False
+                        entities[e].update_pos()
+        elif event.type == pygame.MOUSEMOTION:
+            for e in entities:
+                    if entities[e].rect.collidepoint(event.pos):
+                        if entities[e].dragging == True:
+                            mouse_x, mouse_y = event.pos
+                            entities[e].x = mouse_x + offset_x
+                            entities[e].y = mouse_y + offset_y

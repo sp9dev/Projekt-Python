@@ -1,4 +1,5 @@
 from PIL import Image
+import json
 import pygame
 pygame.font.init()
 descfont = pygame.font.SysFont("Arial", 12, bold=1)
@@ -22,6 +23,7 @@ class IoTEntity:
         self.show_description = False
         self.msg = ""
         self.msgtxt = descfont.render(self.msg, True, (0,0,0), (200,200,200))
+        self.dragging = False
         
     def update_icon(self):
         self.ic = pygame.image.load(self.icon)
@@ -73,11 +75,23 @@ class IoTEntity:
             self.state = 0
             self.icon = "resources/doorclosed.png"
             self.update_icon()
+    
+    def update_pos(self):
+        with open('config.json', 'r') as file:
+            json_data = json.load(file)
+            for item in json_data:
+                if item == self.name:
+                    item['xpos'] = float(self.x) / float(self.area[2])
+                    item['ypos'] = float(self.y) / float(self.area[3])
+        with open('config.json', 'w') as file:
+            json.dump(json_data, file, indent=2)
 
     def toggle_description(self):
         self.show_description = not self.show_description
 
     def blit(self):
+        if self.dragging == True:
+            self.update_icon()
         if self.show_description == True:
             w, h = descfont.size(self.name)
             offset = ((0.1 * self.area[2]) - w)/2
