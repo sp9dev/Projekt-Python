@@ -8,6 +8,7 @@ publikowanych na brokerze.
 
 Zależności:
 ------------
+* Python3
 * PyGame
 * Paho-MQTT
 
